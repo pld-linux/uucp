@@ -9,10 +9,9 @@ Summary(tr):	GNU uucp sistemi
 Summary(uk):	GNU uucp
 Name:		uucp
 Version:	1.06.2
-Release:	4
+Release:	5
 License:	GPL
 Group:		Networking
-URL:		http://lists.cirr.com/cgi-bin/wilma/taylor-uucp/
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
@@ -26,6 +25,7 @@ Patch4:		%{name}-security.patch
 Patch5:		%{name}-lock.patch
 Patch6:		%{name}-pipe.patch
 Patch7:		%{name}-no_libnsl.patch
+URL:		http://lists.cirr.com/cgi-bin/wilma/taylor-uucp/
 BuildRequires:	autoconf
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
