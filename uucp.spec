@@ -9,7 +9,7 @@ Summary(tr):	GNU uucp sistemi
 Summary(uk):	GNU uucp
 Name:		uucp
 Version:	1.06.2
-Release:	5
+Release:	6
 License:	GPL
 Group:		Networking
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
@@ -185,10 +185,10 @@ fi
 %attr(750,uucp,root) %dir %{_sysconfdir}/uucp
 %attr(755,uucp,root) %dir %{_sysconfdir}/uucp/oldconfig
 
-%attr(640,uucp,root) %config %verify(not size mtime md5) %{_sysconfdir}/uucp/ca*
-%attr(640,uucp,root) %config %verify(not size mtime md5) %{_sysconfdir}/uucp/di*
-%attr(640,uucp,root) %config %verify(not size mtime md5) %{_sysconfdir}/uucp/p*
-%attr(640,uucp,root) %config %verify(not size mtime md5) %{_sysconfdir}/uucp/sys
+%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/ca*
+%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/di*
+%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/p*
+%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/sys
 
 %attr(640,root,root) %config /etc/logrotate.d/uucp
 
