@@ -114,7 +114,7 @@ find . -name "*.perlpath" | xargs rm -f
 %configure \
 	--with-newconfigdir=/etc/uucp \
 	--with-oldconfigdir=/etc/uucp/oldconfig
-	
+
 %{__make}
 
 %install
