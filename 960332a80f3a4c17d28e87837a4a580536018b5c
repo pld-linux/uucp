@@ -1,0 +1,8 @@
+- moved running of /usr/sbin/fix-info-dir to %%postun
+- release up
+
+
+* Sun Dec 06 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [1.06.1-1d]
+- build for Linux PLD from non root's account,
+- rewrote spec file & major changes.
