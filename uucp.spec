@@ -8,10 +8,11 @@ Version:	1.06.1
 Release:	3
 Copyright:	GPL
 Group:		Daemons
-Group(pl):	Demony
+Group(pl):	Serwery
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
 Patch0:		%{name}-misc.patch
+Patch1:		%{name}-debian.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -45,6 +46,7 @@ olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 %prep
 %setup -q
 %patch0 -p1 
+%patch -p1
 
 find . -name "*.perlpath" | xargs rm -f
 
