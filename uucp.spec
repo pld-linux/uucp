@@ -5,7 +5,7 @@ Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		Daemons
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
@@ -16,6 +16,7 @@ Source4:	uucp-non-english-man-pages.tar.bz2
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
 Patch2:		%{name}-buggy_autoconf.patch
+Patch3:		%{name}-ac.patch
 BuildRequires:	autoconf
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -55,6 +56,7 @@ olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 %patch0 -p1 
 %patch1 -p1
 %patch2 -p0
+%patch3 -p1
 
 find . -name "*.perlpath" | xargs rm -f
 
