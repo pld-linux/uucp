@@ -7,3 +7,4 @@ USER=uucp
 SERVER=tcpd
 DAEMON=/usr/sbin/uucico
 DAEMONARGS=-l
+INITGROUPS=yes
