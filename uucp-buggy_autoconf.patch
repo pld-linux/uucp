@@ -1,0 +1,12 @@
+--- configure.in.old	Sat Oct  6 23:30:33 2001
++++ configure.in	Sat Oct  6 23:29:13 2001
+@@ -336,7 +336,8 @@
+ uucp_cv_sys_ftime_ok=runtime)])
+ case $uucp_cv_sys_ftime_ok in
+ yes) AC_DEFINE(HAVE_FTIME) AC_MSG_RESULT(yes) ;;
+-no)  AC_MSG_RESULT(no) AC_MSG_WARN(ftime seems to be buggy) ;;
++no)  AC_MSG_RESULT(no)
++     AC_MSG_WARN(ftime seems to be buggy) ;;
+ runtime) AC_DEFINE(HAVE_FTIME) AC_MSG_RESULT(will check at run time) ;;
+ esac
+ ])
