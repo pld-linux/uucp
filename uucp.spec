@@ -5,7 +5,7 @@ Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.1
-Release:	3
+Release:	4
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -110,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%preun
+%postun
 /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files
