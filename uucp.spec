@@ -8,12 +8,12 @@ Summary(ru):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Summary(uk):	GNU uucp
 Name:		uucp
-Version:	1.06.2
-Release:	6
+Version:	1.07
+Release:	1
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.gnu.org/pub/gnu/uucp/%{name}-%{version}.tar.gz
-# Source0-md5:	73af81dbd748292421a22141b25a5365
+# Source0-md5:	64c54d43787339a7cced48390eb3e1d0
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
 Source3:	%{name}.crontab
@@ -21,14 +21,12 @@ Source4:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-ma
 # Source4-md5:	47994a0f9fc7acaadc5cfff6b01f6728
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
-Patch2:		%{name}-buggy_autoconf.patch
-Patch3:		%{name}-ac.patch
-Patch4:		%{name}-security.patch
-Patch5:		%{name}-lock.patch
-Patch6:		%{name}-pipe.patch
-Patch7:		%{name}-no_libnsl.patch
+Patch2:		%{name}-ac.patch
+Patch3:		%{name}-pipe.patch
+Patch4:		%{name}-no_libnsl.patch
 URL:		http://lists.cirr.com/cgi-bin/wilma/taylor-uucp/
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -100,41 +98,35 @@ GNU uucp server.
 Serwer GNU uucp.
 
 %prep
-%setup -q -n uucp-1.06.1
+%setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p0
+%patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 find . -name "*.perlpath" | xargs rm -f
 
 %build
+%{__aclocal}
 %{__autoconf}
-%configure
-
-%{__make} clean; make
+%{__automake}
+%configure \
+	--with-newconfigdir=/etc/uucp \
+	--with-oldconfigdir=/etc/uucp/oldconfig
+	
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8},%{_infodir}} \
-	$RPM_BUILD_ROOT{%{_libdir}/uucp,/var/{lock/uucp,spool/{uucp,uucppublic}}} \
-	$RPM_BUILD_ROOT/var/log/{uucp,archiv/uucp} \
-$RPM_BUILD_ROOT%{_sysconfdir}/{uucp/oldconfig,sysconfig/rc-inetd,cron.d,logrotate.d}
 
-%{__make} install install-info \
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	infodir=$RPM_BUILD_ROOT%{_infodir} \
-	bindir=$RPM_BUILD_ROOT%{_bindir} \
-	sbindir=$RPM_BUILD_ROOT%{_sbindir} \
-	man1dir=$RPM_BUILD_ROOT%{_mandir}/man1 \
-	man8dir=$RPM_BUILD_ROOT%{_mandir}/man8 \
-	owner=`id -u`
+install -d $RPM_BUILD_ROOT/var/{lock/uucp,spool/{uucp,uucppublic}}
+install -d $RPM_BUILD_ROOT/var/log/{uucp,archiv/uucp}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/{uucp/oldconfig,sysconfig/rc-inetd,cron.d,logrotate.d}
 
-ln -sf ../../sbin/uucico $RPM_BUILD_ROOT%{_libdir}/uucp/uucico
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	OWNER=$(id -u)
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.d/uucp
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/uucp
@@ -180,7 +172,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README ChangeLog MANIFEST NEWS sample contrib
+%doc AUTHORS ChangeLog NEWS README TODO sample contrib
 
 %attr(750,uucp,root) %dir %{_sysconfdir}/uucp
 %attr(755,uucp,root) %dir %{_sysconfdir}/uucp/oldconfig
@@ -191,6 +183,7 @@ fi
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/sys
 
 %attr(640,root,root) %config /etc/logrotate.d/uucp
+%config(noreplace) %verify(not size mtime md5) %attr(640,root,root) /etc/cron.d/%{name}
 
 %attr(4554,uucp,uucp) %{_bindir}/cu
 %attr(4554,uucp,uucp) %{_bindir}/uucp
@@ -202,9 +195,6 @@ fi
 %attr(4554,uucp,uucp) %{_bindir}/uux
 
 %{_infodir}/uucp.*
-
-%attr(755,root,root) %dir %{_libdir}/uucp
-%attr(755,root,root) %{_libdir}/uucp/uucico
 
 %{_mandir}/man[18]/*
 %lang(fi) %{_mandir}/fi/man[18]/*
