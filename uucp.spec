@@ -12,6 +12,7 @@ Version:	1.06.2
 Release:	4
 License:	GPL
 Group:		Networking
+URL:		http://lists.cirr.com/cgi-bin/wilma/taylor-uucp/
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
