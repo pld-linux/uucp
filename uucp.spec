@@ -5,7 +5,7 @@ Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.1
-Release:	5
+Release:	6
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -87,6 +87,7 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/uucp
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.d/uucp
 
 install -d $RPM_BUILD_ROOT/var/log/uucp
+install -d $RPM_BUILD_ROOT/var/log/archiv/uucp
 
 # Create empty files
 for n in Log Stats Debug; do
@@ -157,6 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,uucp,uucp) %dir /var/spool/uucp
 
 %attr(750,uucp,root) %dir /var/log/uucp
+%attr(750,uucp,root) %dir /var/log/archiv/uucp
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Debug
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Log
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Stats
