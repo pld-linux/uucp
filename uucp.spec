@@ -5,7 +5,7 @@ Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -14,6 +14,7 @@ Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
 Source3:	%{name}.crontab
+Source4:	uucp-non-english-man-pages.tar.bz2
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
 Patch2:		%{name}-buggy_autoconf.patch
@@ -90,6 +91,7 @@ install -d $RPM_BUILD_ROOT/etc/logrotate.d
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.d/uucp
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/uucp
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.d/uucp
+bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 install -d $RPM_BUILD_ROOT/var/log/uucp
 install -d $RPM_BUILD_ROOT/var/log/archiv/uucp
@@ -162,6 +164,9 @@ fi
 %attr(755,root,root) %{_libdir}/uucp/uucico
 
 %{_mandir}/man[18]/*
+%lang(fi) %{_mandir}/fi/man[18]/*
+%lang(ja) %{_mandir}/ja/man[18]/*
+%lang(pl) %{_mandir}/pl/man[18]/*
 
 %attr(0755,uucp,uucp) %{_sbindir}/uuchk
 %attr(4711,uucp,uucp) %{_sbindir}/uucico
