@@ -14,7 +14,7 @@ Source1:	%{name}.logrotate
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
 Prereq:		/usr/sbin/fix-info-dir
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 UUCP is a Unix to Unix transfer mechanism.  It is used primarily
