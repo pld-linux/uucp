@@ -1,5 +1,5 @@
 Summary:	GNU uucp
-Summary(de):	GNU-uupc 
+Summary(de):	GNU-uucp 
 Summary(fr):	uucp de GNU
 Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
