@@ -12,7 +12,7 @@ Version:	1.06.2
 Release:	6
 License:	GPL
 Group:		Networking
-Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnu.org/pub/gnu/uucp/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
 Source3:	%{name}.crontab
