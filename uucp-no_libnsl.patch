@@ -1,0 +1,11 @@
+--- uucp-1.06.1/configure.in~	Fri Oct  4 10:53:32 2002
++++ uucp-1.06.1/configure.in	Fri Oct  4 10:53:32 2002
+@@ -361,7 +361,7 @@
+ esac
+ case $LIBS in
+ *-lnsl*) ;;
+-*) AC_CHECK_LIB(nsl, main) ;;
++*) AC_CHECK_FUNC(gethostbyname, [], AC_CHECK_LIB(nsl, gethostbyname)) ;;
+ esac
+ case $LIBS in
+ *-lsocket*) ;;
