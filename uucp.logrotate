@@ -1,0 +1,9 @@
+/var/log/uucp/Log {
+    create 640 uucp root
+}
+/var/log/uucp/Debug {
+    create 640 uucp root
+}
+/var/log/uucp/Stats {
+    create 640 uucp root
+}
