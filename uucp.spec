@@ -5,7 +5,7 @@ Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.2
-Release:	6
+Release:	1
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -119,8 +119,18 @@ rm -rf $RPM_BUILD_ROOT
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
+if [ -f /var/lock/subsys/rc-inetd ]; then
+        /etc/rc.d/init.d/rc-inetd reload 1>&2
+else
+        echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server" 1>&2
+fi
+
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+
+if [ -f /var/lock/subsys/rc-inetd ]; then
+        /etc/rc.d/init.d/rc-inetd reload 1>&2
+fi
 
 %files
 %defattr(644,root,root,755)
