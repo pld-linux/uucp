@@ -1,0 +1,9 @@
+- added crontab & rc-inetd config
+- addes some contrib files
+- added /var/spool/uucp directory
+
+
+* Sun Dec 06 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [1.06.1-1d]
+- build for Linux PLD from non root's account,
+- rewrote spec file & major changes.
