@@ -1,2 +1,2 @@
 
-# 5 * * * * uucp /usr/sbin/uucico -S system
+# 5 * * * * uucp /usr/sbin/uucico -r 1 -S system
