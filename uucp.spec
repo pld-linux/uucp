@@ -19,6 +19,7 @@ Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
 Patch2:		%{name}-buggy_autoconf.patch
 BuildRequires:	autoconf
+BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
