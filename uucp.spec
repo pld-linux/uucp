@@ -46,7 +46,7 @@ olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 %prep
 %setup -q
 %patch0 -p1 
-%patch -p1
+%patch1 -p1
 
 find . -name "*.perlpath" | xargs rm -f
 
