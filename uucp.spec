@@ -55,13 +55,13 @@ find . -name "*.perlpath" | xargs rm -f
 %build
 autoconf && %configure
 
-make clean; make 
+%{__make} clean; make 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/{bin,sbin,share/{man/man{1,8},info}}
 
-make \
+%{__make} \
     prefix=$RPM_BUILD_ROOT%{_prefix} \
     infodir=$RPM_BUILD_ROOT%{_infodir} \
     bindir=$RPM_BUILD_ROOT%{_bindir} \
