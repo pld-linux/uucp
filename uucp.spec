@@ -132,8 +132,6 @@ $RPM_BUILD_ROOT%{_sysconfdir}/{uucp/oldconfig,sysconfig/rc-inetd,cron.d,logrotat
 	man8dir=$RPM_BUILD_ROOT%{_mandir}/man8 \
 	owner=`id -u`
 
-gzip -9nf sample/*
-
 ln -sf ../../sbin/uucico $RPM_BUILD_ROOT%{_libdir}/uucp/uucico
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.d/uucp
