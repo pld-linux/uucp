@@ -191,14 +191,14 @@ fi
 
 %attr(640,root,root) %config /etc/logrotate.d/uucp
 
-%attr(4711,uucp,uucp) %{_bindir}/cu
-%attr(4711,uucp,uucp) %{_bindir}/uucp
+%attr(4554,uucp,uucp) %{_bindir}/cu
+%attr(4554,uucp,uucp) %{_bindir}/uucp
 %attr(0755,root,root) %{_bindir}/uulog
-%attr(4711,uucp,uucp) %{_bindir}/uuname
+%attr(4554,uucp,uucp) %{_bindir}/uuname
 %attr(0755,root,root) %{_bindir}/uupick
-%attr(4711,uucp,uucp) %{_bindir}/uustat
+%attr(4554,uucp,uucp) %{_bindir}/uustat
 %attr(0755,root,root) %{_bindir}/uuto
-%attr(4711,uucp,uucp) %{_bindir}/uux
+%attr(4554,uucp,uucp) %{_bindir}/uux
 
 %{_infodir}/uucp.*
 
@@ -211,10 +211,10 @@ fi
 %lang(pl) %{_mandir}/pl/man[18]/*
 
 %attr(0755,uucp,uucp) %{_sbindir}/uuchk
-%attr(4711,uucp,uucp) %{_sbindir}/uucico
+%attr(4554,uucp,uucp) %{_sbindir}/uucico
 %attr(0755,uucp,uucp) %{_sbindir}/uuconv
 %attr(0755,root,root) %{_sbindir}/uusched
-%attr(4711,uucp,uucp) %{_sbindir}/uuxqt
+%attr(4554,uucp,uucp) %{_sbindir}/uuxqt
 
 %attr(755,uucp,uucp) %dir /var/spool/uucppublic
 %attr(755,uucp,uucp) %dir /var/spool/uucp
