@@ -4,12 +4,12 @@ Summary(fr):	uucp de GNU
 Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
-Version:	1.06.1
+Version:	1.06.2
 Release:	6
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
-Source0:	ftp://prep.ai.mit.edu/pub/gnu/%{name}-%{version}.tar.gz
+Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
 Source3:	%{name}.crontab
@@ -46,7 +46,7 @@ sisteme e-posta ve haber öbekleri aktarýmý için kullanýlýr. Bunun ne
 olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 
 %prep
-%setup -q
+%setup -q -n uucp-1.06.1
 %patch0 -p1 
 %patch1 -p1
 
