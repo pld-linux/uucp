@@ -156,9 +156,3 @@ fi
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Debug
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Log
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Stats
-
-%changelog
-* Sun Dec 06 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [1.06.1-1d]
-- build for Linux PLD from non root's account,
-- rewrote spec file & major changes.
