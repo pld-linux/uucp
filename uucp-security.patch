@@ -1,0 +1,113 @@
+From vendor-sec-owner@ns.caldera.de Wed Aug 29 23:36:20 2001
+Received: from ns.caldera.de (root@ns.caldera.de [212.34.180.1])
+	by monad.caldera.de (8.9.3/8.9.3) with ESMTP id XAA22410
+	for <okir@monad.caldera.de>; Wed, 29 Aug 2001 23:36:18 +0200
+Received: (from daemon@localhost)
+	by ns.caldera.de (8.11.1/8.11.1) id f7TLZgQ19049
+	for okir@caldera.de; Wed, 29 Aug 2001 23:35:42 +0200
+Received: from mail.caldera.com(216.250.130.2)
+ via SMTP by ns.caldera.de, id smtpdjDBOlm; Wed Aug 29 23:35:38 2001
+Received: (qmail 1905 invoked by uid 0); 29 Aug 2001 21:35:36 -0000
+Received: from vendor-sec-owner@ns.caldera.de by mail.calderasystems.com with scan4virus-0.50 (uvscan: v4.0.70/v4077. . Clean. Processed in 0.859375 secs); 29/08/2001 15:35:35
+Delivered-To: sco-security@calderasystems.com
+Received: (qmail 1891 invoked by uid 0); 29 Aug 2001 21:35:35 -0000
+Received: from vendor-sec-owner@ns.caldera.de by mail.calderasystems.com with scan4virus-0.50 (uvscan: v4.0.70/v4077. . Clean. Processed in 0.581423 secs); 29/08/2001 15:35:34
+Delivered-To: security@calderasystems.com
+Received: (qmail 1873 invoked by uid 0); 29 Aug 2001 21:35:34 -0000
+Received: from vendor-sec-owner@ns.caldera.de by mail.calderasystems.com with scan4virus-0.50 (uvscan: v4.0.70/v4077. . Clean. Processed in 1.659264 secs); 29/08/2001 15:35:32
+Received: from ns.caldera.de (root@212.34.180.1)
+  by mail.caldera.com with DES-CBC3-SHA encrypted SMTP; 29 Aug 2001 21:35:32 -0000
+Received: (from daemon@localhost)
+	by ns.caldera.de (8.11.1/8.11.1) id f7TLZR618983
+	for vendor-sec-real; Wed, 29 Aug 2001 23:35:27 +0200
+Received: (from daemon@localhost)
+	by ns.caldera.de (8.11.1/8.11.1) id f7TLZRW18979
+	for vendor-sec@lst.de; Wed, 29 Aug 2001 23:35:27 +0200
+Received: from nat-pool-meridian.redhat.com(199.183.24.200), claiming to be "devserv.devel.redhat.com"
+ via SMTP by ns.caldera.de, id smtpdyR6fJe; Wed Aug 29 23:35:14 2001
+Received: (from jbj@localhost)
+	by devserv.devel.redhat.com (8.11.0/8.11.0) id f7TLZD032521;
+	Wed, 29 Aug 2001 17:35:13 -0400
+Date: Wed, 29 Aug 2001 17:35:13 -0400
+From: Jeff Johnson <jbj@redhat.com>
+To: zen-parse <zen-parse@gmx.net>
+Cc: vendor-sec@lst.de
+Subject: Re: uid/gid uucp exploit - RH 7.0 at least
+Message-ID: <20010829173513.R2281@devserv.devel.redhat.com>
+References: <Pine.LNX.4.33.0108280052410.826-101000@clarity.local>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.2.5i
+In-Reply-To: <Pine.LNX.4.33.0108280052410.826-101000@clarity.local>; from zen-parse@gmx.net on Tue, Aug 28, 2001 at 01:27:24AM +1200
+Status: RO
+Content-Length: 1737
+Lines: 66
+
+On Tue, Aug 28, 2001 at 01:27:24AM +1200, zen-parse wrote:
+> It is possible to gain uid/gid uucp on redhat 7.0 with uucp-1.06.1-25
+> installed. (exploit attached, hole described further down)
+> 
+...
+> 
+> uux 'uucp --config=/tmp/vv.v /tmp/somefile /tmp/someotherfile'
+> 
+> will use the supplied configuration, as user/gid uucp.
+
+Here's a patch that blocks the long arg variants of -I -u -g in uuxqt.
+
+--- uucp-1.06.1/uuxqt.c.vetargs	Sun Aug 20 15:29:59 1995
++++ uucp-1.06.1/uuxqt.c	Wed Aug 29 17:16:54 2001
+@@ -928,6 +928,44 @@
+ 	 don't permit multiple arguments.  */
+       for (i = 1; azQargs[i] != NULL; i++)
+ 	{
++	  if (azQargs[i][0] == '-' && azQargs[i][1] == '-')
++	    {
++		char *zopts = azQargs[i] + 2;
++
++		/* The -g, -n, and -s options take an argument.  */
++		if (!strncmp(zopts, "grade", 5) && zopts[5] != '=')
++		  {
++		    if (azQargs[i+1] != NULL)
++		      ++i;
++		  }
++		if (!(strncmp(zopts, "notify", 6)
++		&&    strncmp(zopts, "status", 6)) && zopts[6] != '=')
++		  {
++		    if (azQargs[i+1] != NULL)
++		      ++i;
++		  }
++
++		/* The -I, -u and -x options are not permitted.  */
++		if (!strncmp(zopts, "config", 6))
++		  {
++		    if (zopts[6] != '=' && azQargs[i+1] != NULL)
++		      ++i;
++		    azQargs[i] = zbufcpy ("--nouucico");
++		  }
++		if (!strncmp(zopts, "user", 4))
++		  {
++		    if (zopts[4] != '=' && azQargs[i+1] != NULL)
++		      ++i;
++		    azQargs[i] = zbufcpy ("--nouucico");
++		  }
++		if (!strncmp(zopts, "debug", 5))
++		  {
++		    if (zopts[5] != '=' && azQargs[i+1] != NULL)
++		      ++i;
++		    azQargs[i] = zbufcpy ("--nouucico");
++		  }
++	    }
++	  else
+ 	  if (azQargs[i][0] == '-')
+ 	    {
+ 	      char *zopts;
+
+73 de Jeff
+
+-- 
+Jeff Johnson	ARS N3NPQ
+jbj@redhat.com (jbj@jbj.org)
+Chapel Hill, NC
+
