@@ -1,0 +1,72 @@
+--- uucp-1.06.1/configure.in.org	Sun Aug  4 01:49:42 2002
++++ uucp-1.06.1/configure.in	Sun Aug  4 14:42:19 2002
+@@ -404,55 +404,54 @@
+ dnl
+ dnl Figure out which functions we need from lib subdirectory
+ if test $ac_cv_func_bsearch != yes; then
+-  LIBOBJS="$LIBOBJS bsrch.o"
++  AC_LIBOBJ([bsrch])
+ fi
+ if test $ac_cv_func_bzero != yes \
+    && test $ac_cv_func_memset != yes; then
+-  LIBOBJS="$LIBOBJS bzero.o"
++  AC_LIBOBJ([bzero])
+ fi
+ if test $ac_cv_func_getline != yes; then
+-  LIBOBJS="$LIBOBJS getlin.o"
++  AC_LIBOBJ([getlin])
+ fi
+ if test $ac_cv_func_memchr != yes; then
+-  LIBOBJS="$LIBOBJS memchr.o"
++  AC_LIBOBJ([memchr])
+ fi
+ if test $ac_cv_func_memcmp != yes \
+    && test $ac_cv_func_bcmp != yes; then
+-  LIBOBJS="$LIBOBJS memcmp.o"
++  AC_LIBOBJ([memcmp])
+ fi
+ if test $ac_cv_func_memcpy != yes \
+    && test $ac_cv_func_bcopy != yes; then
+-  LIBOBJS="$LIBOBJS memcpy.o"
++  AC_LIBOBJ([memcpy])
+ fi
+ if test $ac_cv_func_strcasecmp != yes \
+    && test $ac_cv_func_stricmp != yes; then
+-  LIBOBJS="$LIBOBJS strcas.o"
++  AC_LIBOBJ([strcas])
+ fi
+ if test $ac_cv_func_strchr != yes \
+    && test $ac_cv_func_index != yes; then
+-  LIBOBJS="$LIBOBJS strchr.o"
++  AC_LIBOBJ([strchr])
+ fi
+ if test $ac_cv_func_strdup != yes; then
+-  LIBOBJS="$LIBOBJS strdup.o"
++  AC_LIBOBJ([strdup])
+ fi
+ if test $ac_cv_func_strncasecmp != yes \
+    && test $ac_cv_func_strnicmp != yes; then
+-  LIBOBJS="$LIBOBJS strncs.o"
++  AC_LIBOBJ([strncs])
+ fi
+ if test $ac_cv_func_strrchr != yes \
+    && test $ac_cv_func_rindex != yes; then
+-  LIBOBJS="$LIBOBJS strrch.o"
++   AC_LIBOBJ([strrch])
+ fi
+ if test $ac_cv_func_strstr != yes; then
+-  LIBOBJS="$LIBOBJS strstr.o"
++  AC_LIBOBJ([strstr])
+ fi
+ if test $ac_cv_func_strtol != yes; then
+-  LIBOBJS="$LIBOBJS strtol.o"
++  AC_LIBOBJ([strtol])
+ fi
+ if test $ac_cv_func_strtoul != yes; then
+-  LIBOBJS="$LIBOBJS strtou.o"
++  AC_LIBOBJ([strtou])
+ fi
+-AC_SUBST(LIBOBJS)dnl
+ dnl Figure out which functions we need from unix subdirectory
+ if test $ac_cv_func_opendir != yes; then
+   UNIXOBJS="$UNIXOBJS dirent.o"
