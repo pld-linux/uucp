@@ -13,10 +13,12 @@ Release:	6
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.gnu.org/pub/gnu/uucp/%{name}-%{version}.tar.gz
+# Source0-md5:	73af81dbd748292421a22141b25a5365
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
 Source3:	%{name}.crontab
 Source4:	%{name}-non-english-man-pages.tar.bz2
+# Source4-md5:	47994a0f9fc7acaadc5cfff6b01f6728
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
 Patch2:		%{name}-buggy_autoconf.patch
