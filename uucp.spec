@@ -5,9 +5,9 @@ Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.2
-Release:	3
+Release:	4
 License:	GPL
-Group:		Daemons
+Group:		Networking
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
@@ -51,6 +51,18 @@ UUCP bir Unix'ten Unix'e iletim mekanizmasýdýr. Uzak sitelerden yerel
 sisteme e-posta ve haber öbekleri aktarýmý için kullanýlýr. Bunun ne
 olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 
+%package server
+Summary:	GNU uucp server
+Summary(de):	GNU-uucp 
+Summary(fr):	uucp de GNU
+Summary(pl):	Serwer GNU uucp
+Group:		Networking
+Requires:	%{name} = %{version}
+
+%description server
+
+%description -l pl server
+
 %prep
 %setup -q -n uucp-1.06.1
 %patch0 -p1 
@@ -80,7 +92,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8},%{_infodir
     owner=`id -u` \
     install install-info 
 
-gzip -9nf README ChangeLog MANIFEST NEWS sample/* 
+gzip -9nf sample/* 
 
 install -d $RPM_BUILD_ROOT/var/spool/{uucp,uucppublic}
 install -d $RPM_BUILD_ROOT/etc/{uucp/oldconfig,sysconfig/rc-inetd,cron.d}
@@ -122,6 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
+%post server
 if [ -f /var/lock/subsys/rc-inetd ]; then
         /etc/rc.d/init.d/rc-inetd reload 1>&2
 else
@@ -131,13 +144,14 @@ fi
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
+%postun server
 if [ -f /var/lock/subsys/rc-inetd ]; then
         /etc/rc.d/init.d/rc-inetd reload 1>&2
 fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz sample contrib 
+%doc README ChangeLog MANIFEST NEWS sample contrib 
 
 %attr(750,uucp,root) %dir /etc/uucp
 %attr(755,uucp,root) %dir /etc/uucp/oldconfig
@@ -148,7 +162,6 @@ fi
 %attr(640,uucp,root) %config %verify(not size mtime md5) /etc/uucp/sys
 
 %attr(640,root,root) %config /etc/logrotate.d/uucp
-%attr(640,root,root) %config /etc/sysconfig/rc-inetd/uucp
 
 %attr(4711,uucp,uucp) %{_bindir}/cu
 %attr(4711,uucp,uucp) %{_bindir}/uucp
@@ -183,3 +196,6 @@ fi
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Debug
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Log
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Stats
+
+%files server
+%attr(640,root,root) %config /etc/sysconfig/rc-inetd/uucp
