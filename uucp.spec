@@ -58,7 +58,7 @@ besoin d'insatller ce package.
 %description -l pl
 UUCP (Unix to Unix Copy Protocol) jest jednym z podstawowych
 protoko³ów systemu Linux. U¿ywany jest przede wszystkim do wysy³ania i
-pobierania przesy³ek newsów oraz poczty elektronicznej mêdzy maszynami
+pobierania przesy³ek newsów oraz poczty elektronicznej miêdzy maszynami
 po³±czonymi np. przez modem.
 
 %description -l pt_BR
