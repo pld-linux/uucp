@@ -1,0 +1,9 @@
+SERVICE_NAME=uucp
+SOCK_TYPE=stream
+PROTOCOL=tcp
+PORT=540
+FLAGS=nowait
+USER=uucp
+SERVER=tcpd
+DAEMON=/usr/sbin/uucico
+DAEMONARGS=-l
