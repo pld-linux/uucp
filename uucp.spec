@@ -15,6 +15,7 @@ Source2:	%{name}.inetd
 Source3:	%{name}.crontab
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
+Patch2:		%{name}-buggy_autoconf.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,6 +50,7 @@ olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 %setup -q -n uucp-1.06.1
 %patch0 -p1 
 %patch1 -p1
+%patch2 -p0
 
 find . -name "*.perlpath" | xargs rm -f
 
