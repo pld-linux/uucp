@@ -1,9 +1,12 @@
 /var/log/uucp/Log {
+    olddir /var/log/archiv/uucp
     create 640 uucp root
 }
 /var/log/uucp/Debug {
+    olddir /var/log/archiv/uucp
     create 640 uucp root
 }
 /var/log/uucp/Stats {
+    olddir /var/log/archiv/uucp
     create 640 uucp root
 }
