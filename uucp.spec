@@ -182,8 +182,8 @@ fi
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/p*
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/sys
 
-%attr(640,root,root) %config /etc/logrotate.d/uucp
-%config(noreplace) %verify(not size mtime md5) %attr(640,root,root) /etc/cron.d/%{name}
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/logrotate.d/uucp
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.d/%{name}
 
 %attr(4554,uucp,uucp) %{_bindir}/cu
 %attr(4554,uucp,uucp) %{_bindir}/uucp
