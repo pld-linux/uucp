@@ -5,12 +5,14 @@ Summary(pl):	GNU uucp
 Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.1
-Release:	4
+Release:	5
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
+Source2:	%{name}.inetd
+Source3:	%{name}.crontab
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -74,13 +76,15 @@ gzip -9nf README ChangeLog MANIFEST NEWS sample/*
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man{1,8}/*
 
 install -d $RPM_BUILD_ROOT/var/spool/{uucp,uucppublic}
-install -d $RPM_BUILD_ROOT/etc/uucp/oldconfig
+install -d $RPM_BUILD_ROOT/etc/{uucp/oldconfig,sysconfig/rc-inetd,cron.d}
 
 install -d $RPM_BUILD_ROOT/usr/lib/uucp
 ln -sf ../../sbin/uucico $RPM_BUILD_ROOT/usr/lib/uucp/uucico
 
 install -d $RPM_BUILD_ROOT/etc/logrotate.d
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.d/uucp
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/uucp
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.d/uucp
 
 install -d $RPM_BUILD_ROOT/var/log/uucp
 
@@ -114,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz sample 
+%doc *.gz sample contrib 
 
 %attr(750,uucp,root) %dir /etc/uucp
 %attr(755,uucp,root) %dir /etc/uucp/oldconfig
@@ -125,6 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,uucp,root) %config %verify(not size mtime md5) /etc/uucp/sys
 
 %attr(640,root,root) %config /etc/logrotate.d/uucp
+%attr(640,root,root) %config /etc/sysconfig/rc-inetd/uucp
 
 %attr(4711,uucp,uucp) %{_bindir}/cu
 %attr(4711,uucp,uucp) %{_bindir}/uucp
@@ -149,6 +154,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(4711,uucp,uucp) %{_sbindir}/uuxqt
 
 %attr(755,uucp,uucp) %dir /var/spool/uucppublic
+%attr(755,uucp,uucp) %dir /var/spool/uucp
 
 %attr(750,uucp,root) %dir /var/log/uucp
 %attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Debug
