@@ -1,18 +1,34 @@
---- uucp-1.06.1.orig/trans.c
-+++ uucp-1.06.1/trans.c
-@@ -670,7 +670,8 @@
- 	  fhangup = FALSE;
+diff -urN uucp-1.07.org/contrib/uurate.c uucp-1.07/contrib/uurate.c
+--- uucp-1.07.org/contrib/uurate.c	2003-06-13 19:12:28.000000000 +0200
++++ uucp-1.07/contrib/uurate.c	2003-06-13 19:12:49.000000000 +0200
+@@ -307,6 +307,7 @@
+   int sent, called = IN;
+   int report = 0;            /* if <= 0 give msg that no report was avail. */
+   int junk;
++  extern int getopt();
  
- 	  if (qdaemon->fhangup_requested
--	      && qTsend == NULL)
-+	      && qTsend == NULL
-+	      && (qTreceive == NULL || qdaemon->cchans > 1))
- 	    {
- 	      /* The remote system has requested that we transfer
- 		 control by sending CYM after receiving a file.  */
---- uucp-1.06.1.orig/uucico.c
-+++ uucp-1.06.1/uucico.c
-@@ -126,6 +126,9 @@
+   /* --------------------------------------------------------------------
+    *           P r o l o g
+diff -urN uucp-1.07.org/unix/serial.c uucp-1.07/unix/serial.c
+--- uucp-1.07.org/unix/serial.c	2003-06-13 19:12:29.000000000 +0200
++++ uucp-1.07/unix/serial.c	2003-06-13 19:12:41.000000000 +0200
+@@ -999,6 +999,12 @@
+ #ifdef B4000000
+   { B4000000, 4000000 },
+ #endif
++#ifdef B230400
++  { B230400, 230400 },
++#endif
++#ifdef B460800
++  { B460800, 460800 },
++#endif
+   { B0, 0 }
+ };
+ 
+diff -urN uucp-1.07.org/uucico.c uucp-1.07/uucico.c
+--- uucp-1.07.org/uucico.c	2003-06-13 19:12:28.000000000 +0200
++++ uucp-1.07/uucico.c	2003-06-13 19:12:41.000000000 +0200
+@@ -125,6 +125,9 @@
    struct sconnection *qconn;
  };
  
@@ -22,7 +38,7 @@
  /* Local functions.  */
  
  static void uusage P((void));
-@@ -176,6 +179,7 @@
+@@ -175,6 +178,7 @@
    { "nodetach", no_argument, NULL, 'D' },
    { "loop", no_argument, NULL, 'e' },
    { "force", no_argument, NULL, 'f'},
@@ -30,7 +46,7 @@
    { "stdin", required_argument, NULL, 'i' },
    { "prompt", no_argument, NULL, 'l' },
    { "port", required_argument, NULL, 'p' },
-@@ -250,9 +254,9 @@
+@@ -249,9 +253,9 @@
      ++zProgram;
  
  #if COHERENT_C_OPTION
@@ -42,7 +58,7 @@
  #endif
  
    while ((iopt = getopt_long (argc, argv, zopts,
-@@ -293,6 +297,14 @@
+@@ -292,6 +296,14 @@
  	     failed call.  */
  	  fforce = TRUE;
  	  break;
@@ -57,7 +73,7 @@
  
  	case 'i':
  	  /* Type of port to use for standard input.  Only TLI is
-@@ -794,6 +806,7 @@
+@@ -796,6 +808,7 @@
    printf ("Usage: %s [options]\n", zProgram);
    printf (" -s,-S,--system system: Call system (-S implies -f)\n");
    printf (" -f,--force: Force call despite system status\n");
@@ -65,9 +81,9 @@
    printf (" -r state: 1 for master, 0 for slave (default)\n");
    printf (" --master: Act as master\n");
    printf (" --slave: Act as slave (default)\n");
-@@ -940,6 +953,9 @@
-       if (! qsys->uuconf_fcall || qsys->uuconf_qtimegrade == NULL)
- 	continue;
+@@ -968,6 +981,9 @@
+ 	    continue;
+ 	}
  
 +      if (qport && strcmp (qsys->uuconf_zport,qport->uuconf_zname))
 +       continue;
@@ -75,7 +91,7 @@
        fnevertime = FALSE;
  
        /* Make sure this is a legal time to call.  */
-@@ -1331,12 +1347,18 @@
+@@ -1369,12 +1385,18 @@
      boolean fret;
  
      /* Determine the grade we should request of the other system.  A
@@ -99,133 +115,3 @@
  
      /* Determine the name we will call ourselves.  */
      if (qsys->uuconf_zlocalname != NULL)
---- uucp-1.06.1.orig/unix/lock.c
-+++ uucp-1.06.1/unix/lock.c
-@@ -425,7 +425,9 @@
- 	{
- 	  (void) close (o);
- 	  o = -1;
--	  (void) remove (zpath);
-+	  if (remove (zpath) < 0 && errno == EPERM)
-+		break;
-+	  sleep(1);
- 	  fret = TRUE;
- 	  continue;
- 	}
---- uucp-1.06.1.orig/unix/serial.c
-+++ uucp-1.06.1/unix/serial.c
-@@ -920,6 +920,12 @@
- #ifdef B115200
-   { B115200, 115200 },
- #endif
-+#ifdef B230400
-+  { B230400, 230400 },
-+#endif
-+#ifdef B460800
-+  { B460800, 460800 },
-+#endif
-   { B0, 0 }
- };
- 
-@@ -2371,8 +2377,17 @@
- 	  else
- 	    csleepchars = MAX_INPUT - 10;
- 
-+#ifndef BUG
-+	  if (q->ibaud) {
-+	    isleep = (int) (((long) csleepchars * 10000L) / q->ibaud);
-+	    isleep -= 10;
-+	  } else {
-+	    isleep = 1000; /* I hope, a second is right... */
-+	  }
-+#else
- 	  isleep = (int) (((long) csleepchars * 10000L) / q->ibaud);
- 	  isleep -= 10;
-+#endif
- 
- 	  if (isleep > 10)
- 	    {
-@@ -2773,9 +2788,20 @@
- 	                        / baud bits/sec)
- 			       * 10 bits/byte)
- 	     */
-+#ifndef BUG
-+	  if (q->ibaud) {
-+	    stime.tv_sec = (long) 10240 / q->ibaud;
-+	    stime.tv_usec = ((((long) 1024000000 / q->ibaud) * (long) 10)
-+			     % (long) 1000000);
-+	  } else {
-+	    stime.tv_sec = 1;
-+	    stime.tv_usec = 0;
-+	  }
-+#else
- 	  stime.tv_sec = (long) 10240 / q->ibaud;
- 	  stime.tv_usec = ((((long) 1024000000 / q->ibaud) * (long) 10)
- 			   % (long) 1000000);
-+#endif
- 
- 	  imask = 1 << q->o;
- 	  if (imask == 0)
-@@ -2846,7 +2872,14 @@
-                  we don't need to use the catch stuff, since we know
-                  that HAVE_RESTARTABLE_SYSCALLS is 0.  */
- 	      usset_signal (SIGALRM, usalarm, TRUE, (boolean *) NULL);
-+#ifndef BUG
-+	      if (q->ibaud)
-+	        alarm ((int) ((long) 10240 / q->ibaud) + 1);
-+	      else
-+		alarm (1);
-+#else
- 	      alarm ((int) ((long) 10240 / q->ibaud) + 1);
-+#endif
- 
- 	      /* There is a race condition here: on a severely loaded
-                  system, we could get the alarm before we start the
---- uucp-1.06.1.orig/contrib/Makefile.uurt
-+++ uucp-1.06.1/contrib/Makefile.uurt
-@@ -19,7 +19,7 @@
- # Flags to use when compiling uurate
- CC=gcc -O2
- CFLAGS=-I.. -Wall
--LDFLAGS=-s
-+LDFLAGS=-s -lm
- 
- SHELL=/bin/sh
- PROGS=uurate
---- uucp-1.06.1.orig/contrib/uurate.c
-+++ uucp-1.06.1/contrib/uurate.c
-@@ -302,6 +302,7 @@
-   int sent, called = IN;
-   int report = 0;            /* if <= 0 give msg that no report was avail. */
-   int junk;
-+  extern int getopt();
- 
-   /* --------------------------------------------------------------------
-    *           P r o l o g
-@@ -980,7 +981,7 @@
-              if (cur->next == NULL)            /* totals line reached ? */
-                 hdrprt('s',1);                 /* print the separator line */
- 
--             printf("%-8s %4d %4d %9s %9s %9s %9s %9s %5.0f %5.0f\n",
-+             printf("%-8s %4ld %4ld %9s %9s %9s %9s %9s %5.0f %5.0f\n",
-                    cur->Hostname, rf, sf,
-                    t1, t2, t3, t4, t5,
-                    ir, or);
-@@ -1028,7 +1029,7 @@
-                     hdrprt('p',0);            /* print the header line(s) */
-                     hdr_done = TRUE;
-                 }
--                printf("%-8s %3s  %4d %4d %5d %4d    %10d %7d %10d\n",
-+                printf("%-8s %3s  %4ld %4ld %5ld %4ld    %10ld %7ld %10ld\n",
-                                     type == NULL ? " ":cur->Hostname,
-                                     prot->type,
-                                     prot->pr_psizemin,
-@@ -1072,7 +1073,7 @@
-                          hdrprt('p',1);       /* print the header line(s) */
-                          hdr_done = TRUE;
-                       }
--                      printf("%-8s %3s  %11d %11d  %11d %11d\n",
-+                      printf("%-8s %3s  %11ld %11ld  %11ld %11ld\n",
-                                     type == NULL ? " ":cur->Hostname,
-                                     prot->type,
-                                     prot->pr_eheader,

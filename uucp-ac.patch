@@ -1,6 +1,18 @@
---- uucp-1.06.1/configure.in.org	Sun Aug  4 01:49:42 2002
-+++ uucp-1.06.1/configure.in	Sun Aug  4 14:42:19 2002
-@@ -404,55 +404,54 @@
+diff -urN uucp-1.07.org/configure.in uucp-1.07/configure.in
+--- uucp-1.07.org/configure.in	2003-06-13 19:12:28.000000000 +0200
++++ uucp-1.07/configure.in	2003-06-13 19:21:25.000000000 +0200
+@@ -361,8 +361,8 @@
+ AC_CHECK_FUNC(getdelim,
+ [AC_CHECK_FUNC(getline,
+ [AC_DEFINE(HAVE_GETLINE, 1, [Define if you have the getline function.])],
+-[LIBOBJS="$LIBOBJS getlin.o"])],
+-[LIBOBJS="$LIBOBJS getlin.o"])
++[AC_LIBOBJ([getlin])])],
++[AC_LIBOBJ([getlin])])
+ dnl
+ dnl Check for the SCO buggy ftime; the code can cope with the bug,
+ dnl though it would prefer not to, so if we're cross-configuring we
+@@ -465,52 +465,51 @@
  dnl
  dnl Figure out which functions we need from lib subdirectory
  if test $ac_cv_func_bsearch != yes; then
@@ -11,10 +23,6 @@
     && test $ac_cv_func_memset != yes; then
 -  LIBOBJS="$LIBOBJS bzero.o"
 +  AC_LIBOBJ([bzero])
- fi
- if test $ac_cv_func_getline != yes; then
--  LIBOBJS="$LIBOBJS getlin.o"
-+  AC_LIBOBJ([getlin])
  fi
  if test $ac_cv_func_memchr != yes; then
 -  LIBOBJS="$LIBOBJS memchr.o"
@@ -52,7 +60,7 @@
  if test $ac_cv_func_strrchr != yes \
     && test $ac_cv_func_rindex != yes; then
 -  LIBOBJS="$LIBOBJS strrch.o"
-+   AC_LIBOBJ([strrch])
++  AC_LIBOBJ([strrch])
  fi
  if test $ac_cv_func_strstr != yes; then
 -  LIBOBJS="$LIBOBJS strstr.o"
