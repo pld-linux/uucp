@@ -1,0 +1,11 @@
+--- uucp-1.06.1/policy.h.serial	Sat Jul 28 11:18:07 2001
++++ uucp-1.06.1/policy.h	Sat Jul 28 11:19:46 2001
+@@ -302,7 +302,7 @@
+ /* #define LOCKDIR "/usr/spool/locks" */
+ /* #define LOCKDIR "/usr/spool/uucp/LCK" */
+ /* #define LOCKDIR "/var/spool/lock" */
+-#define LOCKDIR "/var/lock"
++#define LOCKDIR "/var/lock/uucp"
+ 
+ /* You must also specify the format of the lock files by setting
+    exactly one of the following macros to 1.  Check an existing lock
