@@ -6,8 +6,9 @@ Summary(tr):	GNU uucp sistemi
 Name:		uucp
 Version:	1.06.2
 Release:	6
-Copyright:	GPL
+License:	GPL
 Group:		Daemons
+Group(de):	Server
 Group(pl):	Serwery
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/uucp/%{name}-%{version}.tar.gz
 Source1:	%{name}.logrotate
@@ -16,30 +17,33 @@ Source3:	%{name}.crontab
 Patch0:		%{name}-misc.patch
 Patch1:		%{name}-debian.patch
 Patch2:		%{name}-buggy_autoconf.patch
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-UUCP is a Unix to Unix transfer mechanism.  It is used primarily
-for remote sites to download and upload email and news files to local
-machines. If you didn't already know that, you probably don't need this
-package installed.  :-)
+UUCP is a Unix to Unix transfer mechanism. It is used primarily for
+remote sites to download and upload email and news files to local
+machines. If you didn't already know that, you probably don't need
+this package installed. :-)
 
 %description -l de
 UUCP ist ein Unix-nach-Unix-Übertragungsprotokoll. Es wird vor allem
-verwendet, um E-Mail- und News-Dateien von entfernten auf lokale Rechner
-herunter- bzw. umgekehrt hochzuladen. Wie Sie wahrscheinlich wissen,
-müssen Sie das Paket wahrscheinlich nicht installieren.  :-)
+verwendet, um E-Mail- und News-Dateien von entfernten auf lokale
+Rechner herunter- bzw. umgekehrt hochzuladen. Wie Sie wahrscheinlich
+wissen, müssen Sie das Paket wahrscheinlich nicht installieren. :-)
 
 %description -l fr
-UUCP est un mécanisme de transfert d'UNIX à UNIX. Il est principalement
-utilisés par les sites de connexion pour télécharger ou envoyer des courriers
-èlèctroniques et des nouvelles sur les machines locales. Si vous ne saviez
-pas déja cela, vous n'avez probablement pas besoin d'insatller ce package.
+UUCP est un mécanisme de transfert d'UNIX à UNIX. Il est
+principalement utilisés par les sites de connexion pour télécharger ou
+envoyer des courriers èlèctroniques et des nouvelles sur les machines
+locales. Si vous ne saviez pas déja cela, vous n'avez probablement pas
+besoin d'insatller ce package.
 
 %description -l pl
-UUCP (Unix to Unix Copy Protocol) jest jednym z podstawowych protoko³ów systemu
-Linux. U¿ywany jest przede wszystkim do wysy³ania i pobierania przesy³ek newsów
-oraz poczty elektronicznej mêdzy maszynami po³±czonymi np. przez modem. 
+UUCP (Unix to Unix Copy Protocol) jest jednym z podstawowych
+protoko³ów systemu Linux. U¿ywany jest przede wszystkim do wysy³ania i
+pobierania przesy³ek newsów oraz poczty elektronicznej mêdzy maszynami
+po³±czonymi np. przez modem.
 
 %description -l tr
 UUCP bir Unix'ten Unix'e iletim mekanizmasýdýr. Uzak sitelerden yerel
@@ -55,13 +59,14 @@ olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 find . -name "*.perlpath" | xargs rm -f
 
 %build
-autoconf && %configure
+autoconf
+%configure
 
 %{__make} clean; make 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/{bin,sbin,share/{man/man{1,8},info}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8},%{_infodir}}
 
 %{__make} \
     prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -73,15 +78,13 @@ install -d $RPM_BUILD_ROOT/usr/{bin,sbin,share/{man/man{1,8},info}}
     owner=`id -u` \
     install install-info 
 
-gzip -9nf $RPM_BUILD_ROOT%{_infodir}/uucp*
 gzip -9nf README ChangeLog MANIFEST NEWS sample/* 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man{1,8}/*
 
 install -d $RPM_BUILD_ROOT/var/spool/{uucp,uucppublic}
 install -d $RPM_BUILD_ROOT/etc/{uucp/oldconfig,sysconfig/rc-inetd,cron.d}
 
-install -d $RPM_BUILD_ROOT/usr/lib/uucp
-ln -sf ../../sbin/uucico $RPM_BUILD_ROOT/usr/lib/uucp/uucico
+install -d $RPM_BUILD_ROOT%{_libdir}/uucp
+ln -sf ../../sbin/uucico $RPM_BUILD_ROOT%{_libdir}/uucp/uucico
 
 install -d $RPM_BUILD_ROOT/etc/logrotate.d
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.d/uucp
@@ -97,7 +100,7 @@ for n in Log Stats Debug; do
 done
 
 for i in dial passwd port dialcode sys call ; do
-cat > $RPM_BUILD_ROOT/etc/uucp/$i <<EOF 
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/uucp/$i <<EOF
 # This is an example of a $i file. This file have the syntax compatible
 # with Taylor UUCP (not HDB, not anything else). Please check uucp
 # documentation if you are not sure how Taylor config files are supposed to 
