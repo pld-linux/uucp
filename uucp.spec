@@ -59,7 +59,7 @@ olduðunu bilmiyorsanýz, büyük olasýlýkla iþinize de yaramayacaktýr. :-)
 find . -name "*.perlpath" | xargs rm -f
 
 %build
-autoconf
+%{__autoconf}
 %configure
 
 %{__make} clean; make 
