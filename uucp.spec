@@ -58,8 +58,8 @@ besoin d'insatller ce package.
 %description -l pl
 UUCP (Unix to Unix Copy Protocol) jest jednym z podstawowych
 protoko³ów systemu Linux. U¿ywany jest przede wszystkim do wysy³ania i
-pobierania przesy³ek newsów oraz poczty elektronicznej miêdzy maszynami
-po³±czonymi np. przez modem.
+pobierania przesy³ek newsów oraz poczty elektronicznej miêdzy
+maszynami po³±czonymi np. przez modem.
 
 %description -l pt_BR
 UUCP é um mecanismo de transferência de Unix para Unix. Ele é usado
@@ -177,21 +177,21 @@ fi
 %attr(750,uucp,root) %dir %{_sysconfdir}/uucp
 %attr(755,uucp,root) %dir %{_sysconfdir}/uucp/oldconfig
 
-%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/ca*
-%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/di*
-%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/p*
-%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/uucp/sys
+%attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/uucp/ca*
+%attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/uucp/di*
+%attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/uucp/p*
+%attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/uucp/sys
 
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/logrotate.d/uucp
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/cron.d/%{name}
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/uucp
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/%{name}
 
 %attr(4554,uucp,uucp) %{_bindir}/cu
 %attr(4554,uucp,uucp) %{_bindir}/uucp
-%attr(0755,root,root) %{_bindir}/uulog
+%attr(755,root,root) %{_bindir}/uulog
 %attr(4554,uucp,uucp) %{_bindir}/uuname
-%attr(0755,root,root) %{_bindir}/uupick
+%attr(755,root,root) %{_bindir}/uupick
 %attr(4554,uucp,uucp) %{_bindir}/uustat
-%attr(0755,root,root) %{_bindir}/uuto
+%attr(755,root,root) %{_bindir}/uuto
 %attr(4554,uucp,uucp) %{_bindir}/uux
 
 %{_infodir}/uucp.*
@@ -201,10 +201,10 @@ fi
 %lang(ja) %{_mandir}/ja/man[18]/*
 %lang(pl) %{_mandir}/pl/man[18]/*
 
-%attr(0755,uucp,uucp) %{_sbindir}/uuchk
+%attr(755,uucp,uucp) %{_sbindir}/uuchk
 %attr(4554,uucp,uucp) %{_sbindir}/uucico
-%attr(0755,uucp,uucp) %{_sbindir}/uuconv
-%attr(0755,root,root) %{_sbindir}/uusched
+%attr(755,uucp,uucp) %{_sbindir}/uuconv
+%attr(755,root,root) %{_sbindir}/uusched
 %attr(4554,uucp,uucp) %{_sbindir}/uuxqt
 
 %attr(755,uucp,uucp) %dir /var/spool/uucppublic
@@ -213,10 +213,10 @@ fi
 %attr(750,uucp,root) %dir /var/log/uucp
 %attr(750,uucp,root) %dir /var/log/archiv/uucp
 %attr(750,uucp,root) %dir /var/lock/uucp
-%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Debug
-%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Log
-%attr(640,uucp,root) %config(noreplace) %verify(not size mtime md5) /var/log/uucp/Stats
+%attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) /var/log/uucp/Debug
+%attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) /var/log/uucp/Log
+%attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) /var/log/uucp/Stats
 
 %files server
 %defattr(644,root,root,755)
-%attr(640,root,root) %config /etc/sysconfig/rc-inetd/uucp
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/uucp
