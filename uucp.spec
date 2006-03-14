@@ -27,6 +27,7 @@ Patch4:		%{name}-no_libnsl.patch
 URL:		http://lists.cirr.com/cgi-bin/wilma/taylor-uucp/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -112,8 +113,8 @@ find . -name "*.perlpath" | xargs rm -f
 %{__autoconf}
 %{__automake}
 %configure \
-	--with-newconfigdir=/etc/uucp \
-	--with-oldconfigdir=/etc/uucp/oldconfig
+	--with-newconfigdir=%{_sysconfdir}/uucp \
+	--with-oldconfigdir=%{_sysconfdir}/uucp/oldconfig
 
 %{__make}
 
@@ -122,7 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/var/{lock/uucp,spool/{uucp,uucppublic}}
 install -d $RPM_BUILD_ROOT/var/log/{uucp,archiv/uucp}
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{uucp/oldconfig,sysconfig/rc-inetd,cron.d,logrotate.d}
+install -d $RPM_BUILD_ROOT/etc/{sysconfig/rc-inetd,cron.d,logrotate.d}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/uucp/oldconfig
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -156,18 +158,14 @@ rm -rf $RPM_BUILD_ROOT
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %post server
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server" 1>&2
-fi
+%service -q rc-inetd reload
 
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun server
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
+if [ "$1" = 0 ]; then
+	%service -q rc-inetd reload
 fi
 
 %files
