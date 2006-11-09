@@ -1,0 +1,4 @@
+- separate -server package
+- group changed to "Networking"
+- new %doc
+- release 4
