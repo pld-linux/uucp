@@ -90,7 +90,7 @@ Summary(de):	GNU-uucp
 Summary(fr):	uucp de GNU
 Summary(pl):	Serwer GNU uucp
 Group:		Networking
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description server
 GNU uucp server.
