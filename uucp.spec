@@ -1,12 +1,12 @@
 Summary:	GNU uucp
-Summary(de.UTF-8):   GNU-uucp
-Summary(es.UTF-8):   Uucp de la GNU
-Summary(fr.UTF-8):   uucp de GNU
-Summary(pl.UTF-8):   GNU uucp
-Summary(pt_BR.UTF-8):   Uucp da GNU
-Summary(ru.UTF-8):   GNU uucp
-Summary(tr.UTF-8):   GNU uucp sistemi
-Summary(uk.UTF-8):   GNU uucp
+Summary(de.UTF-8):	GNU-uucp
+Summary(es.UTF-8):	Uucp de la GNU
+Summary(fr.UTF-8):	uucp de GNU
+Summary(pl.UTF-8):	GNU uucp
+Summary(pt_BR.UTF-8):	Uucp da GNU
+Summary(ru.UTF-8):	GNU uucp
+Summary(tr.UTF-8):	GNU uucp sistemi
+Summary(uk.UTF-8):	GNU uucp
 Name:		uucp
 Version:	1.07
 Release:	3
@@ -86,9 +86,9 @@ UUCP - це механізм передачі файлів між UNIX-сист�
 
 %package server
 Summary:	GNU uucp server
-Summary(de.UTF-8):   GNU-uucp
-Summary(fr.UTF-8):   uucp de GNU
-Summary(pl.UTF-8):   Serwer GNU uucp
+Summary(de.UTF-8):	GNU-uucp
+Summary(fr.UTF-8):	uucp de GNU
+Summary(pl.UTF-8):	Serwer GNU uucp
 Group:		Networking
 Requires:	%{name} = %{version}-%{release}
 
