@@ -1,12 +1,12 @@
 Summary:	GNU uucp
-Summary(de):	GNU-uucp
-Summary(es):	Uucp de la GNU
-Summary(fr):	uucp de GNU
-Summary(pl):	GNU uucp
-Summary(pt_BR):	Uucp da GNU
-Summary(ru):	GNU uucp
-Summary(tr):	GNU uucp sistemi
-Summary(uk):	GNU uucp
+Summary(de.UTF-8):   GNU-uucp
+Summary(es.UTF-8):   Uucp de la GNU
+Summary(fr.UTF-8):   uucp de GNU
+Summary(pl.UTF-8):   GNU uucp
+Summary(pt_BR.UTF-8):   Uucp da GNU
+Summary(ru.UTF-8):   GNU uucp
+Summary(tr.UTF-8):   GNU uucp sistemi
+Summary(uk.UTF-8):   GNU uucp
 Name:		uucp
 Version:	1.07
 Release:	3
@@ -37,65 +37,65 @@ remote sites to download and upload email and news files to local
 machines. If you didn't already know that, you probably don't need
 this package installed. :-)
 
-%description -l de
-UUCP ist ein Unix-nach-Unix-эbertragungsprotokoll. Es wird vor allem
+%description -l de.UTF-8
+UUCP ist ein Unix-nach-Unix-ц°bertragungsprotokoll. Es wird vor allem
 verwendet, um E-Mail- und News-Dateien von entfernten auf lokale
 Rechner herunter- bzw. umgekehrt hochzuladen. Wie Sie wahrscheinlich
-wissen, mЭssen Sie das Paket wahrscheinlich nicht installieren. :-)
+wissen, mц╪ssen Sie das Paket wahrscheinlich nicht installieren. :-)
 
-%description -l es
+%description -l es.UTF-8
 UUCP es un mecanismo de transferencia de Unix para Unix. Se usa
 primeramente en sitios remotos para hacer download y upload de
-archivos de mail y news para mАquinas locales. Si no lo sabias,
+archivos de mail y news para mц║quinas locales. Si no lo sabias,
 probablemente no necesitas de este paquete instalado. :-)
 
-%description -l fr
-UUCP est un mИcanisme de transfert d'UNIX Ю UNIX. Il est
-principalement utilisИs par les sites de connexion pour tИlИcharger ou
-envoyer des courriers ХlХctroniques et des nouvelles sur les machines
-locales. Si vous ne saviez pas dИja cela, vous n'avez probablement pas
+%description -l fr.UTF-8
+UUCP est un mц╘canisme de transfert d'UNIX ц═ UNIX. Il est
+principalement utilisц╘s par les sites de connexion pour tц╘lц╘charger ou
+envoyer des courriers ц╗lц╗ctroniques et des nouvelles sur les machines
+locales. Si vous ne saviez pas dц╘ja cela, vous n'avez probablement pas
 besoin d'insatller ce package.
 
-%description -l pl
+%description -l pl.UTF-8
 UUCP (Unix to Unix Copy Protocol) jest jednym z podstawowych
-protokoЁСw systemu Linux. U©ywany jest przede wszystkim do wysyЁania i
-pobierania przesyЁek newsСw oraz poczty elektronicznej miЙdzy
-maszynami poЁ╠czonymi np. przez modem.
+protokoе┌цЁw systemu Linux. Uе╪ywany jest przede wszystkim do wysyе┌ania i
+pobierania przesyе┌ek newsцЁw oraz poczty elektronicznej miд≥dzy
+maszynami poе┌д┘czonymi np. przez modem.
 
-%description -l pt_BR
-UUCP И um mecanismo de transferЙncia de Unix para Unix. Ele И usado
+%description -l pt_BR.UTF-8
+UUCP ц╘ um mecanismo de transferц╙ncia de Unix para Unix. Ele ц╘ usado
 primeiramente em sites remotos para fazer download e upload de
-arquivos de mail e news para mАquinas locais. Se vocЙ nЦo sabia disso,
-vocЙ provavelmente nЦo precisa deste pacote instalado. :-)
+arquivos de mail e news para mц║quinas locais. Se vocц╙ nцёo sabia disso,
+vocц╙ provavelmente nцёo precisa deste pacote instalado. :-)
 
-%description -l ru
-UUCP - это механизм передачи файлов между UNIX-системами. В основном
-используется для обмена почтой и телеконференциями между машинами.
-Если вы этого не знали, вам этот пакет не нужен :-))
+%description -l ru.UTF-8
+UUCP - я█я┌п╬ п╪п╣я┘п╟п╫п╦п╥п╪ п©п╣я─п╣п╢п╟я┤п╦ я└п╟п╧п╩п╬п╡ п╪п╣п╤п╢я┐ UNIX-я│п╦я│я┌п╣п╪п╟п╪п╦. п▓ п╬я│п╫п╬п╡п╫п╬п╪
+п╦я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐ п╢п╩я▐ п╬п╠п╪п╣п╫п╟ п©п╬я┤я┌п╬п╧ п╦ я┌п╣п╩п╣п╨п╬п╫я└п╣я─п╣п╫я├п╦я▐п╪п╦ п╪п╣п╤п╢я┐ п╪п╟я┬п╦п╫п╟п╪п╦.
+п∙я│п╩п╦ п╡я▀ я█я┌п╬пЁп╬ п╫п╣ п╥п╫п╟п╩п╦, п╡п╟п╪ я█я┌п╬я┌ п©п╟п╨п╣я┌ п╫п╣ п╫я┐п╤п╣п╫ :-))
 
-%description -l tr
-UUCP bir Unix'ten Unix'e iletim mekanizmasЩdЩr. Uzak sitelerden yerel
-sisteme e-posta ve haber Жbekleri aktarЩmЩ iГin kullanЩlЩr. Bunun ne
-olduПunu bilmiyorsanЩz, bЭyЭk olasЩlЩkla iЧinize de yaramayacaktЩr.
+%description -l tr.UTF-8
+UUCP bir Unix'ten Unix'e iletim mekanizmasд╠dд╠r. Uzak sitelerden yerel
+sisteme e-posta ve haber ц╤bekleri aktarд╠mд╠ iц╖in kullanд╠lд╠r. Bunun ne
+olduд÷unu bilmiyorsanд╠z, bц╪yц╪k olasд╠lд╠kla iе÷inize de yaramayacaktд╠r.
 :-)
 
-%description -l uk
-UUCP - це механ╕зм передач╕ файл╕в м╕ж UNIX-системами. Здеб╕льшого
-використову╓ться для обм╕ну поштою та телеконференц╕ями м╕ж машинами.
-Якщо ви цього не знали, вам цей пакет не потр╕бен :-))
+%description -l uk.UTF-8
+UUCP - я├п╣ п╪п╣я┘п╟п╫я√п╥п╪ п©п╣я─п╣п╢п╟я┤я√ я└п╟п╧п╩я√п╡ п╪я√п╤ UNIX-я│п╦я│я┌п╣п╪п╟п╪п╦. п≈п╢п╣п╠я√п╩я▄я┬п╬пЁп╬
+п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я■я┌я▄я│я▐ п╢п╩я▐ п╬п╠п╪я√п╫я┐ п©п╬я┬я┌п╬я▌ я┌п╟ я┌п╣п╩п╣п╨п╬п╫я└п╣я─п╣п╫я├я√я▐п╪п╦ п╪я√п╤ п╪п╟я┬п╦п╫п╟п╪п╦.
+п╞п╨я┴п╬ п╡п╦ я├я▄п╬пЁп╬ п╫п╣ п╥п╫п╟п╩п╦, п╡п╟п╪ я├п╣п╧ п©п╟п╨п╣я┌ п╫п╣ п©п╬я┌я─я√п╠п╣п╫ :-))
 
 %package server
 Summary:	GNU uucp server
-Summary(de):	GNU-uucp
-Summary(fr):	uucp de GNU
-Summary(pl):	Serwer GNU uucp
+Summary(de.UTF-8):   GNU-uucp
+Summary(fr.UTF-8):   uucp de GNU
+Summary(pl.UTF-8):   Serwer GNU uucp
 Group:		Networking
 Requires:	%{name} = %{version}-%{release}
 
 %description server
 GNU uucp server.
 
-%description server -l pl
+%description server -l pl.UTF-8
 Serwer GNU uucp.
 
 %prep
