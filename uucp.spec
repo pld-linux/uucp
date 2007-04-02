@@ -209,7 +209,7 @@ fi
 %attr(755,uucp,uucp) %dir /var/spool/uucp
 
 %attr(750,uucp,root) %dir /var/log/uucp
-%attr(750,uucp,root) %dir /var/log/archiv/uucp
+%attr(750,uucp,root) %dir /var/log/archive/uucp
 %attr(750,uucp,root) %dir /var/lock/uucp
 %attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) /var/log/uucp/Debug
 %attr(640,uucp,root) %config(noreplace) %verify(not md5 mtime size) /var/log/uucp/Log
