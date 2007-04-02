@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	GNU uucp sistemi
 Summary(uk.UTF-8):	GNU uucp
 Name:		uucp
 Version:	1.07
-Release:	3
+Release:	4
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.gnu.org/pub/gnu/uucp/%{name}-%{version}.tar.gz
@@ -122,7 +122,7 @@ find . -name "*.perlpath" | xargs rm -f
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/var/{lock/uucp,spool/{uucp,uucppublic}}
-install -d $RPM_BUILD_ROOT/var/log/{uucp,archiv/uucp}
+install -d $RPM_BUILD_ROOT/var/log/{uucp,archive/uucp}
 install -d $RPM_BUILD_ROOT/etc/{sysconfig/rc-inetd,cron.d,logrotate.d}
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/uucp/oldconfig
 
