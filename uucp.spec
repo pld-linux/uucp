@@ -29,6 +29,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	texinfo
+Conflicts:	logrotate < 3.7.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
