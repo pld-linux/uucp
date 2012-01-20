@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	GNU uucp sistemi
 Summary(uk.UTF-8):	GNU uucp
 Name:		uucp
 Version:	1.07
-Release:	5
+Release:	6
 License:	GPL
 Group:		Networking
 Source0:	ftp://ftp.gnu.org/pub/gnu/uucp/%{name}-%{version}.tar.gz
@@ -29,7 +29,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	texinfo
-Conflicts:	logrotate < 3.7-4
+Conflicts:	logrotate < 3.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
