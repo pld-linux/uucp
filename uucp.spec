@@ -9,10 +9,10 @@ Summary(tr.UTF-8):	GNU uucp sistemi
 Summary(uk.UTF-8):	GNU uucp
 Name:		uucp
 Version:	1.07
-Release:	6
+Release:	7
 License:	GPL
 Group:		Networking
-Source0:	ftp://ftp.gnu.org/pub/gnu/uucp/%{name}-%{version}.tar.gz
+Source0:	http://ftp.gnu.org/gnu/uucp/%{name}-%{version}.tar.gz
 # Source0-md5:	64c54d43787339a7cced48390eb3e1d0
 Source1:	%{name}.logrotate
 Source2:	%{name}.inetd
@@ -29,6 +29,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	texinfo
+Requires:	crondaemon
 Conflicts:	logrotate < 3.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -131,9 +132,9 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/uucp/oldconfig
 	DESTDIR=$RPM_BUILD_ROOT \
 	OWNER=$(id -u)
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.d/uucp
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/uucp
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.d/uucp
+cp -p %{SOURCE1} $RPM_BUILD_ROOT/etc/logrotate.d/uucp
+cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/uucp
+cp -p %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.d/uucp
 bzip2 -dc %{SOURCE4} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 # Create empty files
@@ -141,7 +142,7 @@ for n in Log Stats Debug; do
 	touch $RPM_BUILD_ROOT/var/log/uucp/$n
 done
 
-for i in dial passwd port dialcode sys call ; do
+for i in dial passwd port dialcode sys call; do
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/uucp/$i <<EOF
 # This is an example of a $i file. This file have the syntax compatible
 # with Taylor UUCP (not HDB, not anything else). Please check uucp
