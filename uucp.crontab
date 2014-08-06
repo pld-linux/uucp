@@ -1,2 +1,3 @@
+MAILTO=root
 
 # 5 * * * * uucp /usr/sbin/uucico -r 1 -S system
