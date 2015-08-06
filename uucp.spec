@@ -24,6 +24,7 @@ Patch1:		%{name}-debian.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-pipe.patch
 Patch4:		%{name}-no_libnsl.patch
+Patch5:		format-security.patch
 URL:		http://lists.cirr.com/cgi-bin/wilma/taylor-uucp/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -107,6 +108,7 @@ Serwer GNU uucp.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 find . -name "*.perlpath" | xargs rm -f
 
