@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	GNU uucp sistemi
 Summary(uk.UTF-8):	GNU uucp
 Name:		uucp
 Version:	1.07
-Release:	7
+Release:	8
 License:	GPL
 Group:		Networking
 Source0:	http://ftp.gnu.org/gnu/uucp/%{name}-%{version}.tar.gz
