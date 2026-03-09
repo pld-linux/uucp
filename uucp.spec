@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	GNU uucp sistemi
 Summary(uk.UTF-8):	GNU uucp
 Name:		uucp
 Version:	1.07
-Release:	8
+Release:	9
 License:	GPL
 Group:		Networking
 Source0:	http://ftp.gnu.org/gnu/uucp/%{name}-%{version}.tar.gz
@@ -117,6 +117,7 @@ find . -name "*.perlpath" | xargs rm -f
 %{__autoconf}
 %{__automake}
 %configure \
+	CFLAGS="%{rpmcflags} -std=gnu89" \
 	--with-newconfigdir=%{_sysconfdir}/uucp \
 	--with-oldconfigdir=%{_sysconfdir}/uucp/oldconfig
 
